@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Writer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .card-form {
+            margin-bottom: 20px;
+        }
+
+        .card-form input, .card-form textarea {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card-form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-form button:hover {
+            background-color: #45a049;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            max-width: 400px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card .status {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Card Writer</h1>
+
+    <form class="card-form" id="cardForm">
+        <input type="text" id="cardId" placeholder="Card ID" required>
+        <input type="text" id="cardName" placeholder="Card Name" required>
+        <input type="text" id="cardStatus" placeholder="Card Status" required>
+        <textarea id="cardDescription" placeholder="Card Description" rows="4" required></textarea>
+        <button type="submit">Add Card</button>
+    </form>
+
+    <div id="cardsContainer"></div>
+
+    <script>
+        const cardForm = document.getElementById('cardForm');
+        const cardsContainer = document.getElementById('cardsContainer');
+
+        cardForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get input values
+            const id = document.getElementById('cardId').value;
+            const name = document.getElementById('cardName').value;
+            const status = document.getElementById('cardStatus').value;
+            const description = document.getElementById('cardDescription').value;
+
+            // Create card element
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${name} (ID: ${id})</h3>
+                <p class="status">Status: ${status}</p>
+                <p>${description}</p>
+            `;
+
+            // Add card to container
+            cardsContainer.appendChild(card);
+
+            // Clear form inputs
+            cardForm.reset();
+        });
+    </script>
+</body>
+</html>
